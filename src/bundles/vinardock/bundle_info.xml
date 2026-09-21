@@ -1,11 +1,11 @@
-<BundleInfo name="ChimeraX-Vinardock" version="0.1"
+<BundleInfo name="ChimeraX-Vinardock" version="0.1.0"
 	    package="chimerax.vinardock"
 	    customInit="false" minSessionVersion="1" maxSessionVersion="1">
 
   <!-- Fill in your contact info before submitting to the ChimeraX Toolshed. -->
   <Author>Rodrigo Quiroga</Author>
   <Email>rquiroga@unc.edu.ar</Email>
-  <URL>https://github.com/rquiroga7/ChimeraX</URL>
+  <URL>https://github.com/rquiroga7/ChimeraX-Vinardock</URL>
 
   <Synopsis>Read Vinardock/PDBT docking files and define docking search boxes</Synopsis>
   <Description>Open Vinardock and DOCK PDBT/PDBQT docking files (with correct
@@ -38,7 +38,7 @@ search box.
 
   <Classifiers>
     <PythonClassifier>Development Status :: 2 - Pre-Alpha</PythonClassifier>
-    <ChimeraXClassifier>Command :: dockbox :: General :: Define a docking search box</ChimeraXClassifier>
+    <ChimeraXClassifier>Command :: dockbox :: Binding Analysis :: Define a docking search box</ChimeraXClassifier>
     <ChimeraXClassifier>Tool :: Docking Box :: Binding Analysis :: Define and edit docking search boxes</ChimeraXClassifier>
   </Classifiers>
 
