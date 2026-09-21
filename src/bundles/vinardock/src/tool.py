@@ -162,7 +162,7 @@ class DockBoxTool(ToolInstance):
             return
         from Qt.QtWidgets import QApplication
         text = "\n".join(
-            "%s %.1f" % (option, value)
+            "%s %.3f" % (option, value)
             for option, value in (
                 ("--center_x", self.box.center[0]),
                 ("--center_y", self.box.center[1]),
