@@ -46,7 +46,7 @@ class DockBoxTool(ToolInstance):
     # UI
     # ------------------------------------------------------------------
     def _build_ui(self):
-        from Qt.QtWidgets import (QVBoxLayout, QGridLayout, QLabel, QDoubleSpinBox,
+        from Qt.QtWidgets import (QVBoxLayout, QHBoxLayout, QGridLayout, QLabel, QDoubleSpinBox,
             QGroupBox, QCheckBox, QPushButton, QComboBox)
         layout = QVBoxLayout()
 
@@ -67,9 +67,17 @@ class DockBoxTool(ToolInstance):
             grid.addWidget(spin, 2, col + 1)
         layout.addLayout(grid)
 
+        show_row = QHBoxLayout()
         self._show_cb = QCheckBox("Show box")
         self._show_cb.toggled.connect(self._show_toggled)
-        layout.addWidget(self._show_cb)
+        show_row.addWidget(self._show_cb)
+        self._copy_btn = QPushButton("Copy config")
+        self._copy_btn.setToolTip("Copy the box center and size to the clipboard "
+                                  "as --center_x/--size_x command-line options.")
+        self._copy_btn.clicked.connect(self._copy_config)
+        show_row.addWidget(self._copy_btn)
+        show_row.addStretch(1)
+        layout.addLayout(show_row)
 
         group = QGroupBox("Autobox around ligand")
         gl = QGridLayout()
@@ -148,6 +156,23 @@ class DockBoxTool(ToolInstance):
     def _show_toggled(self, checked):
         if self.box is not None:
             self.box.display = checked
+
+    def _copy_config(self):
+        if self.box is None:
+            return
+        from Qt.QtWidgets import QApplication
+        text = "\n".join(
+            "%s %.1f" % (option, value)
+            for option, value in (
+                ("--center_x", self.box.center[0]),
+                ("--center_y", self.box.center[1]),
+                ("--center_z", self.box.center[2]),
+                ("--size_x", self.box.size[0]),
+                ("--size_y", self.box.size[1]),
+                ("--size_z", self.box.size[2]),
+            )
+        ) + "\n"
+        QApplication.clipboard().setText(text)
 
     # ------------------------------------------------------------------
     # actions
