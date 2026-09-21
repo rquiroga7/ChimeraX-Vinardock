@@ -51,13 +51,20 @@ class _VinardockAPI(BundleAPI):
 
 
 def _maybe_show_viewdock(session, models):
-    """Open the ViewDock tool for results that carry dock data (even a single pose)."""
+    """Open the ViewDock tool for results that carry dock data (even a single pose).
+
+    ViewDock is optional: it ships with ChimeraX but may not be present in every
+    installation, so the import is guarded.
+    """
     if not session.ui.is_gui:
         return
     all_models = sum([m.all_models() for m in models], start=[])
     if not any(hasattr(m, 'viewdock_data') for m in all_models):
         return
-    from chimerax.viewdock import open_viewdock_tool
+    try:
+        from chimerax.viewdock import open_viewdock_tool
+    except ImportError:
+        return
     from Qt.QtCore import QTimer
     QTimer.singleShot(0, lambda s=session, m=models: open_viewdock_tool(s, m))
 
