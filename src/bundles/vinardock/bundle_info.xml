@@ -1,4 +1,4 @@
-<BundleInfo name="ChimeraX-Vinardock" version="0.1.1"
+<BundleInfo name="ChimeraX-Vinardock" version="0.1.2"
 	    package="chimerax.vinardock"
 	    customInit="false" minSessionVersion="1" maxSessionVersion="1">
 
