@@ -1,4 +1,4 @@
-<BundleInfo name="ChimeraX-Vinardock" version="0.1.0"
+<BundleInfo name="ChimeraX-Vinardock" version="0.1.1"
 	    package="chimerax.vinardock"
 	    customInit="false" minSessionVersion="1" maxSessionVersion="1">
 
@@ -21,7 +21,7 @@ search box.
     <Dependency name="ChimeraX-Core" version="~=1.0"/>
     <Dependency name="ChimeraX-Atomic" version="~=1.0"/>
     <Dependency name="ChimeraX-DataFormats" version="~=1.0"/>
-    <Dependency name="ChimeraX-OpenCommand" version="~=1.15"/>
+    <Dependency name="ChimeraX-OpenCommand" version="~=1.0"/>
     <Dependency name="ChimeraX-MouseModes" version="~=1.0"/>
     <Dependency name="ChimeraX-UI" version="~=1.0"/>
     <Dependency name="ChimeraX-ViewDock" version="~=1.0"/>

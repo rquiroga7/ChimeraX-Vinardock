@@ -1,7 +1,7 @@
 #!/bin/sh
 # Build and install the ChimeraX-Vinardock bundle into an existing ChimeraX.
 #
-# ChimeraX is NOT included with this bundle; install it from
+# ChimeraX is NOT included with this bundle.  Install it from
 # https://www.rbvi.ucsf.edu/chimerax/download.html first.
 #
 # Usage:
@@ -12,12 +12,23 @@ set -e
 
 here=$(cd "$(dirname "$0")" && pwd)
 bundle="$here/src/bundles/vinardock"
-chimerax="${CHIMERAX:-ChimeraX}"
 
-if ! command -v "$chimerax" >/dev/null 2>&1 && [ ! -x "$chimerax" ]; then
-    echo "ChimeraX executable not found: $chimerax" >&2
+# Find the ChimeraX executable: honour $CHIMERAX, otherwise "chimerax", then
+# "ChimeraX".
+if [ -n "$CHIMERAX" ]; then
+    chimerax="$CHIMERAX"
+elif command -v chimerax >/dev/null 2>&1; then
+    chimerax=chimerax
+elif command -v ChimeraX >/dev/null 2>&1; then
+    chimerax=ChimeraX
+else
+    chimerax=""
+fi
+
+if [ -z "$chimerax" ] || { ! command -v "$chimerax" >/dev/null 2>&1 && [ ! -x "$chimerax" ]; }; then
+    echo "ChimeraX executable not found (tried: \$CHIMERAX, chimerax, ChimeraX)." >&2
     echo "Install ChimeraX from https://www.rbvi.ucsf.edu/chimerax/download.html" >&2
-    echo "or set CHIMERAX to its path, e.g. CHIMERAX=/opt/ChimeraX/bin/ChimeraX ./install.sh" >&2
+    echo "or set CHIMERAX, e.g. CHIMERAX=/opt/ChimeraX/bin/ChimeraX ./install.sh" >&2
     exit 1
 fi
 

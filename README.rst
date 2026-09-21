@@ -19,31 +19,36 @@ This repository contains only the bundle.  It does **not** include ChimeraX.
 Requirements
 ------------
 
-* UCSF ChimeraX — download from the official site:
-  https://www.rbvi.ucsf.edu/chimerax/download.html
+* UCSF ChimeraX — install the official **prebuilt** application from
+  https://www.rbvi.ucsf.edu/chimerax/download.html .  There is no need to build
+  ChimeraX from source.  A current 1.x release is recommended.
 
 Installation
 ------------
 
-With ChimeraX installed and available as ``ChimeraX`` on your ``PATH``::
+Install the bundle with ChimeraX's own installer, ``toolshed``.  Do **not** use
+plain ``pip``: this bundle depends on other ChimeraX bundles (such as
+``ChimeraX-OpenCommand``) which are not Python packages on PyPI.
+
+From a prebuilt wheel::
+
+    chimerax --nogui --exit --cmd "toolshed install /path/to/chimerax_vinardock-*.whl"
+
+From this source checkout (builds and installs in one step)::
 
     ./install.sh
 
-If the executable has a different path, point ``CHIMERAX`` at it::
+If ``chimerax`` is not on your ``PATH``, point the script at it::
 
     CHIMERAX=/path/to/ChimeraX ./install.sh
 
-The script runs ``devel install`` on the bundle, which builds and installs it
-into your ChimeraX.  Restart ChimeraX afterwards.
+Restart ChimeraX afterwards.
 
-To build a redistributable wheel instead::
+To build a redistributable wheel::
 
-    ChimeraX --nogui --exit --cmd "devel build $(pwd)/src/bundles/vinardock exit true"
+    ./build.sh
 
-The wheel is written to ``src/bundles/vinardock/dist`` and can be installed by
-anyone with::
-
-    ChimeraX --nogui --exit --cmd "toolshed install /path/to/chimerax_vinardock-*.whl"
+The wheel is written to ``src/bundles/vinardock/dist``.
 
 Usage
 -----
