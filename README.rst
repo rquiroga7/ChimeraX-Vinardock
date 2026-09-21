@@ -1,0 +1,65 @@
+ChimeraX-Vinardock
+==================
+
+An original `UCSF ChimeraX <https://www.rbvi.ucsf.edu/chimerax/>`_ bundle with two
+related features for docking with `Vinardock <https://github.com/>`_ / DOCK:
+
+* **PDBT / PDBQT reader** — opens Vinardock and DOCK ``.pdbt`` and AutoDock
+  ``.pdbqt`` files.  It regroups each residue's atoms so that hydrogens appended
+  at the end of the file are bonded to the correct heavy atoms, and it reads
+  per-pose metadata (Vinardock ``REMARK 980`` energy / ``REMARK 990`` RMSD;
+  AutoDock Vina ``REMARK VINA RESULT``) into the ViewDock table.
+* **Docking Box tool** — draws and edits a docking search box: type the center
+  and size, autobox around a chosen ligand (default padding 10 Å), and move /
+  resize the box with the mouse (left-drag moves; right-drag a side resizes it,
+  keeping the opposite side fixed).
+
+This repository contains only the bundle.  It does **not** include ChimeraX.
+
+Requirements
+------------
+
+* UCSF ChimeraX — download from the official site:
+  https://www.rbvi.ucsf.edu/chimerax/download.html
+
+Installation
+------------
+
+With ChimeraX installed and available as ``ChimeraX`` on your ``PATH``::
+
+    ./install.sh
+
+If the executable has a different path, point ``CHIMERAX`` at it::
+
+    CHIMERAX=/path/to/ChimeraX ./install.sh
+
+The script runs ``devel install`` on the bundle, which builds and installs it
+into your ChimeraX.  Restart ChimeraX afterwards.
+
+To build a redistributable wheel instead::
+
+    ChimeraX --nogui --exit --cmd "devel build $(pwd)/src/bundles/vinardock exit true"
+
+The wheel is written to ``src/bundles/vinardock/dist`` and can be installed by
+anyone with::
+
+    ChimeraX --nogui --exit --cmd "toolshed install /path/to/chimerax_vinardock-*.whl"
+
+Usage
+-----
+
+Commands::
+
+    dockbox center 1,2,3 size 10,20,30
+    dockbox autobox #1 autobox_size 10
+    dockbox close true
+    dockbox                         # show the Docking Box tool
+
+The **Docking Box** tool is under *Binding Analysis*.  Its ligand list defaults
+to the first docking pose in an opened ``.pdbt`` output file.
+
+License
+-------
+
+GNU General Public License, version 2 (see ``LICENSE``).  This bundle is an
+original work and is not part of UCSF ChimeraX.

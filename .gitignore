@@ -1,0 +1,23 @@
+# This repository tracks only the ChimeraX-Vinardock bundle.
+# Everything else in this working tree is the ChimeraX source/build and is ignored.
+/*
+!/.gitignore
+!/README.rst
+!/LICENSE
+!/install.sh
+!/src
+/src/*
+!/src/bundles
+/src/bundles/*
+!/src/bundles/vinardock
+
+# Local build artifacts
+/src/bundles/vinardock/build/
+/src/bundles/vinardock/dist/
+/src/bundles/vinardock/*.egg-info/
+/src/bundles/vinardock/Makefile
+__pycache__/
+*.pyc
+
+# Backup of the previous (ChimeraX fork) git directory
+/.git-fork-backup/
