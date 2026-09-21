@@ -106,21 +106,38 @@ def _fix_columns(line):
 
 def _apply_metadata(session, stream, structures):
     """Attach per-pose energy/RMSD values from REMARK records to structures."""
+    lines = stream.readlines()
+    if not any(line[:6] == 'MODEL ' for line in lines):
+        # Single pose without a MODEL/ENDMDL wrapper: attach any REMARK values
+        # (e.g. Vinardock REMARK 980) to the one structure.
+        if len(structures) == 1:
+            values = {RATING_KEY: DEFAULT_RATING}
+            for line in lines:
+                if line[:6] == 'REMARK':
+                    values.update(_remark_values(line))
+            if len(values) > 1:
+                _attach(session, structures[0], values)
+        return
+
     model = -1
     values = None
-    for line in stream:
+    for line in lines:
         record = line[:6]
         if record == 'MODEL ':
             model += 1
             values = {RATING_KEY: DEFAULT_RATING}
         elif record == 'ENDMDL':
             if values is not None and 0 <= model < len(structures):
-                from chimerax.atomic import Structure
-                Structure.register_attr(session, 'viewdock_data', 'ViewDock')
-                structures[model].viewdock_data = values
+                _attach(session, structures[model], values)
             values = None
         elif record == 'REMARK' and values is not None:
             values.update(_remark_values(line))
+
+
+def _attach(session, structure, values):
+    from chimerax.atomic import Structure
+    Structure.register_attr(session, 'viewdock_data', 'ViewDock')
+    structure.viewdock_data = values
 
 
 def _remark_values(line):

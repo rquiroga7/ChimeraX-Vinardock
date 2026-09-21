@@ -51,12 +51,10 @@ class _VinardockAPI(BundleAPI):
 
 
 def _maybe_show_viewdock(session, models):
-    """Open the ViewDock tool for multi-pose results that carry dock data."""
+    """Open the ViewDock tool for results that carry dock data (even a single pose)."""
     if not session.ui.is_gui:
         return
     all_models = sum([m.all_models() for m in models], start=[])
-    if len(all_models) < 2:
-        return
     if not any(hasattr(m, 'viewdock_data') for m in all_models):
         return
     from chimerax.viewdock import open_viewdock_tool
