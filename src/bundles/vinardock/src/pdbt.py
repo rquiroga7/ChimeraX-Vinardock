@@ -10,7 +10,8 @@
 #     data is handed to the PDB reader (otherwise hydrogens end up unbonded).
 #   * Vinardock records the per-pose energy and RMSD as REMARK 980 and 990.
 #
-# This is an original implementation for the ChimeraX-Vinardock bundle.
+# This is an original implementation for the ChimeraX-Vinardock bundle,
+# distributed under the GNU Lesser General Public License v2.1 (see LICENSE).
 
 ENCODINGS = ('utf-8', 'utf-16', 'utf-32')
 

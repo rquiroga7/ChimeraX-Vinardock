@@ -61,5 +61,5 @@ to the first docking pose in an opened ``.pdbt`` output file.
 License
 -------
 
-GNU General Public License, version 2 (see ``LICENSE``).  This bundle is an
-original work and is not part of UCSF ChimeraX.
+GNU Lesser General Public License, version 2.1 (see ``LICENSE``).  This bundle
+is an original work and is not part of UCSF ChimeraX.

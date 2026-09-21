@@ -1,7 +1,8 @@
 # vim: set expandtab shiftwidth=4 softtabstop=4:
 
-# This file is part of the ChimeraX-Vinardock bundle, an original
-# ChimeraX plugin.  See the bundle's LICENSE file for terms.
+# This file is part of the ChimeraX-Vinardock bundle, an original ChimeraX
+# plugin distributed under the GNU Lesser General Public License v2.1.
+# See the bundled LICENSE file.
 
 from chimerax.core.tools import ToolInstance
 from chimerax.ui import MainToolWindow
