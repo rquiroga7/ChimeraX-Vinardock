@@ -5,6 +5,7 @@
 !/README.rst
 !/LICENSE
 !/install.sh
+!/build.sh
 !/src
 /src/*
 !/src/bundles
